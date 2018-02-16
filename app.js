@@ -1,17 +1,43 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
-const config = require("./config.json");
 const request = require("request");
 const pokemon = require('pokemon');
 const NodeGeocoder = require('node-geocoder');
 
+
+function getConfig() {
+    try {
+        var config = require('../config.json')
+    } catch (err) {
+        return getEnvConfig()
+    }
+    if (typeof config == 'undefined'  || !config.token || !config.prefix || !config.gmaps) {
+        return getEnvConfig()
+    }
+    return config
+}
+
+function getEnvConfig () {
+    console.log(process.env);
+    var envconfig = {
+        token: process.env.TOKEN,
+        prefix: process.env.PREFIX,
+        gmaps: process.env.GMAPS
+    };
+
+    if (!envconfig.token || !envconfig.prefix || !envconfig.gmaps) {
+        console.log('Failed to get config information');
+        return;
+    }
+    return envconfig
+}
 
 var options = {
     provider: 'google',
 
     // Optional depending on the providers
     httpAdapter: 'https', // Default
-    apiKey: config.gmaps,
+    apiKey: getConfig().gmaps,
     formatter: null         // 'gpx', 'string', ...
 };
 
@@ -76,4 +102,6 @@ client.on('message', message => {
    };
 });
 
-client.login(config.token);
+
+
+client.login(getConfig().token);
