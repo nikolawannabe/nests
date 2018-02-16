@@ -1,0 +1,5 @@
+{
+ "token"  : "your discord bot's token",
+ "prefix" : "!",
+ "gmaps": "your google maps geocode token"
+}
