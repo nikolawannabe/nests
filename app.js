@@ -58,7 +58,6 @@ client.on('message', message => {
                 "data[zoom]": 11.730587536260147,
                 "data[mapFilterValues][mapTypes][]": 1,
                 "data[mapFilterValues][nestVerificationLevels][]": 1,
-                "data[mapFilterValues][nestVerificationLevels][]": 2,
                 "data[mapFilterValues][nestTypes][]": -1,
                 "data[center_lat]": 48.13437947931877,
                 "data[center_lng]": -123.42850167753045
